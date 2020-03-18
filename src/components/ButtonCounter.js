@@ -1,23 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function ButtonCounter() {
+export default function ButtonCounter(props) {
 
-  let numberOfClicks = 0;
+  const [state, setState] = useState({ numberOfClicks: 0 });
 
   function handleClick(event) {
-    // this won't work as expected, we must use useState
-    numberOfClicks++;
-    // look into the console and you will see the counter does get incremented
-    console.log("Number of clicks: " + numberOfClicks);
-    // BUT without using useState/setState, the HTML will never be re-rendered
-    // so it will remain at 0 in the page
+    setState({ numberOfClicks: state.numberOfClicks + 1 });
   }
 
   return (
     <div className="ButtonCounter">
       <button onClick={handleClick}>Click me</button>
 
-      <p>Number of clicks: {numberOfClicks}</p>
+      <p>Number of clicks: {state.numberOfClicks}</p>
 
       <p>This code was render at: {new Date().toString()}</p>
     </div>
